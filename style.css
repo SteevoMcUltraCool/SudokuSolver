@@ -87,11 +87,9 @@ input {
     stroke: none;
     background: transparent;
 }
-#bigGrid input:active {
-    border: none;
-    box-shadow: none;
-    stroke: none;
-    background: transparent;
+
+#bigGrid input:disabled {
+    filter: contrast(30%);
 }
 #rightHandSide {
     width: 25%;
@@ -104,4 +102,8 @@ input {
     background-color: var(--foreground);
     color: var(--background);
     border: 1px solid var(--tint);
+}
+
+#bigGrid .solved {
+    filter: none;
 }
