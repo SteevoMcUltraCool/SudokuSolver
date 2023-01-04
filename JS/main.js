@@ -4,25 +4,26 @@ const DOM = {
     solveButton: document.getElementById("solveBu")
 }
 document.adoptedStyleSheets = [sheet];
-let Grid1 = new Grid(1,1)
-let Grid2 = new Grid(2,1)
-let Grid3 = new Grid(3,1)
-let Grid4 = new Grid(1,2)
-let Grid5 = new Grid(2,2)
-let Grid6 = new Grid(3,2)
-let Grid7 = new Grid(1,3)
-let Grid8 = new Grid(2,3)
-let Grid9 = new Grid(3,3)
+let Grids = {}
+Grids.Grid1 = new Grid(1,1)
+Grids.Grid2 = new Grid(2,1)
+Grids.Grid3 = new Grid(3,1)
+Grids.Grid4 = new Grid(1,2)
+Grids.Grid5 = new Grid(2,2)
+Grids.Grid6 = new Grid(3,2)
+Grids.Grid7 = new Grid(1,3)
+Grids.Grid8 = new Grid(2,3)
+Grids.Grid9 = new Grid(3,3)
 
-Grid1.boxify()
-Grid2.boxify()
-Grid3.boxify()
-Grid4.boxify()
-Grid5.boxify()
-Grid6.boxify()
-Grid7.boxify()
-Grid8.boxify()
-Grid9.boxify()
+Grids.Grid1.boxify()
+Grids.Grid2.boxify()
+Grids.Grid3.boxify()
+Grids.Grid4.boxify()
+Grids.Grid5.boxify()
+Grids.Grid6.boxify()
+Grids.Grid7.boxify()
+Grids.Grid8.boxify()
+Grids.Grid9.boxify()
 
 function LastNumberRemaining(FilledBoxes, UnfilledBoxes){
     let change = false
@@ -32,13 +33,40 @@ function LastNumberRemaining(FilledBoxes, UnfilledBoxes){
             box.setValue(pot[0])
             box.input.readOnly = true
             box.input.className = "solved"
-            UnfilledBoxes = UnfilledBoxes.filter(item => (item.column != box.column &&  item.row != box.row)) // item!=box
+            console.log(UnfilledBoxes.length)
+            UnfilledBoxes = UnfilledBoxes.filter(item => {
+                return (item.column != box.column ||  item.row != box.row)
+            }) // item!=box
+            console.log(UnfilledBoxes.length)
             FilledBoxes.push(box)
             box.elimateValueNearby()
             change = true
         }else if (pot.length == 0) {
             console.error("puzzle unsolvable");
         }
+    })
+    return [FilledBoxes, UnfilledBoxes, change]
+}
+function LastCellRemainingInGrid(FilledBoxes, UnfilledBoxes){
+    let change = false
+    Object.values(Grids).forEach(grid => {
+        let change = false
+        for (let i = 1; i<=9; i++){
+            console.log(grid)
+            let boxesWith = grid.Boxes.filter(box=>box && box.potetnialValues.includes(i)&& !box.getValue())
+            if (boxesWith.length==1){
+                let box = boxesWith[0]
+                box.setValue(i)
+                box.input.readOnly = true
+                box.input.className = "solved"
+                UnfilledBoxes = UnfilledBoxes.filter(item => {
+                    return (item.column != box.column ||  item.row != box.row)
+                }) // item!=box
+                FilledBoxes.push(box)
+                change = true
+            }
+        }
+
     })
     return [FilledBoxes, UnfilledBoxes, change]
 }
@@ -52,9 +80,23 @@ DOM.solveButton.addEventListener("click",function(){
         box.elimateValueNearby()
     })
     Boxes.forEach(row=>row && row.filter(box => box && !box.getValue()).forEach(box => UnfilledBoxes.push(box)))
-    UnfilledBoxes.forEach(box => console.log(box.element))
-    let b = LastNumberRemaining(FilledBoxes, UnfilledBoxes)
-    FilledBoxes, UnfilledBoxes = b[0],b[1]
-    UnfilledBoxes.forEach(box => console.log(box.element))
-
+    let suspense = false
+    do {
+        let change = false
+        do {
+            let b = LastNumberRemaining(FilledBoxes, UnfilledBoxes)
+            FilledBoxes = b[0]
+            UnfilledBoxes = b[1]
+            change = b[2]
+            suspense = suspense || change
+        } while(change)
+        change = false
+        do {
+            let b = LastCellRemainingInGrid(FilledBoxes, UnfilledBoxes)
+            FilledBoxes = b[0]
+            UnfilledBoxes = b[1]
+            change = b[2]
+            suspense = suspense || change
+        } while(change)
+    }while(UnfilledBoxes.length>0 && suspense)
 })
