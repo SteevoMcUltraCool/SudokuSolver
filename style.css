@@ -107,3 +107,16 @@ input {
 #bigGrid .solved {
     filter: none;
 }
+
+@media  screen and (max-width: 700px) {
+    #mommy {
+        flex-direction: column;
+    }
+    #bigGrid input {
+        font-size: 14px;
+    }
+    #solveBu {
+        width: 95%;
+        margin: auto auto;
+    }
+}
