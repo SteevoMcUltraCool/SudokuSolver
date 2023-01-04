@@ -1,9 +1,7 @@
-import sheet from "../style.css" assert {type:"css"}
 import {Box, Grid} from "./box.js"
 const DOM = {
     solveButton: document.getElementById("solveBu")
 }
-document.adoptedStyleSheets = [sheet];
 let Grids = {}
 Grids.Grid1 = new Grid(1,1)
 Grids.Grid2 = new Grid(2,1)
