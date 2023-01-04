@@ -108,15 +108,22 @@ input {
     filter: none;
 }
 
-@media  screen and (max-width: 700px) {
+@media  screen and (max-width: 900px) {
     #mommy {
         flex-direction: column;
     }
     #bigGrid input {
         font-size: 14px;
     }
+    #bigGrid {
+        height: auto;
+        width: 100%;
+    }
+    #rightHandSide {
+        width: 100%;
+    }
     #solveBu {
-        width: 95%;
-        margin: auto auto;
+        width: 100%;
+        margin: 10px auto;
     }
 }
