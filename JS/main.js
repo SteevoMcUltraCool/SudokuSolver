@@ -25,22 +25,22 @@ Grid8.boxify()
 Grid9.boxify()
 
 function LastNumberRemaining(FilledBoxes, UnfilledBoxes){
+    let change = false
     UnfilledBoxes.forEach(box =>{
-        let change = false
-        let pot = box.potetnialValues.filter(value => value)
+        let pot = box.potetnialValues.filter(value => value)// any null values ignored
         if (pot.length == 1) {
-            console.log(box.potetnialValues, box.column, box.row)
             box.setValue(pot[0])
             box.input.readOnly = true
             box.input.className = "solved"
-            UnfilledBoxes = UnfilledBoxes.filter(item => item != box)
+            UnfilledBoxes = UnfilledBoxes.filter(item => (item.column != box.column &&  item.row != box.row)) // item!=box
             FilledBoxes.push(box)
+            box.elimateValueNearby()
             change = true
         }else if (pot.length == 0) {
             console.error("puzzle unsolvable");
         }
-        return [FilledBoxes, UnfilledBoxes, change]
     })
+    return [FilledBoxes, UnfilledBoxes, change]
 }
 DOM.solveButton.addEventListener("click",function(){
     let Boxes = Box.prototype.getBoxes()
@@ -48,15 +48,13 @@ DOM.solveButton.addEventListener("click",function(){
     let UnfilledBoxes = []
     Boxes.forEach(row=>row && row.filter(box => box && box.getValue()).forEach(box => FilledBoxes.push(box)))
     FilledBoxes.forEach(box=>{
-        console.log(box.input.value)
         box.input.disabled = true
         box.elimateValueNearby()
     })
     Boxes.forEach(row=>row && row.filter(box => box && !box.getValue()).forEach(box => UnfilledBoxes.push(box)))
-    let change = true
-    do {
-        let b = LastNumberRemaining(FilledBoxes, UnfilledBoxes)
-        console.log(b)
-        FilledBoxes, UnfilledBoxes, change = b[0], b[1], b[2]
-    }while(change)
+    UnfilledBoxes.forEach(box => console.log(box.element))
+    let b = LastNumberRemaining(FilledBoxes, UnfilledBoxes)
+    FilledBoxes, UnfilledBoxes = b[0],b[1]
+    UnfilledBoxes.forEach(box => console.log(box.element))
+
 })

@@ -53,7 +53,7 @@ class eBox {
     }
     setValue(number) {
         this.potetnialValues = [number]
-        this.input.value = number
+        this.input.value = String(number)
     }
     elimateValueNearby() {
         let Row = Boxes[this.column]
