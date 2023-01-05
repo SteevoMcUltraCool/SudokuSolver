@@ -73,6 +73,7 @@ input {
     background-color: transparent;
     color: var(--foreground);
     width: 80%;
+    min-width: 20px;
     height: 80%;
     margin: 10%;
     padding: 0%;
@@ -80,6 +81,7 @@ input {
     border: none;
     box-shadow: none;
     text-align: center;
+    
 }
 #bigGrid input:focus {
     border: none;
