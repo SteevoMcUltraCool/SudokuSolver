@@ -143,11 +143,21 @@ const methods = {
     ],
     operate: function (FilledBoxes, UnfilledBoxes, Grids) {
       let change = false;
+      let Boxes = Boxes.prototype.getBoxes();
       Object.values(Grids).forEach((grid) => {
         let poppy = grid.Boxes.filter((box) => box && !box.getValue());
         if (poppy.length <= 3 && poppy.length >= 2) {
           if (poppy[2]) {
             if (poppy[0].row == poppy[1].row && poppy[1].row == poppy[2].row) {
+              Boxes[row]
+                .filter(
+                  (box) =>
+                    box &&
+                    box.column != poppy[0].column &&
+                    box.column != poppy[1].column &&
+                    box.column != poppy[2].column
+                )
+                .forEach((box) => box);
             } else if (
               poppy[0].column == poppy[1].column &&
               poppy[1].column == poppy[2].column
