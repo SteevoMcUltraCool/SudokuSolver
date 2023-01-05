@@ -120,7 +120,7 @@ const methods = {
         operate: function(FilledBoxes, UnfilledBoxes,Grids){
             let change = false
             Object.values(Grids).forEach(grid => {
-                let poppy = grid.Boxes.filtert(box =>box && !box.getValue())
+                let poppy = grid.Boxes.filter(box =>box && !box.getValue())
                 if (poppy.length <= 3){
                     if ((poppy[0].row == poppy[1].row ) && (poppy[1].row==poppy[2].row)) {
 
