@@ -131,6 +131,7 @@ const methods = {
                     }
                 }
             })
+          return [FilledBoxes, UnfilledBoxes, change]
         }       
     }
 }
