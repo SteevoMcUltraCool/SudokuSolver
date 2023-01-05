@@ -31,11 +31,9 @@ function LastNumberRemaining(FilledBoxes, UnfilledBoxes){
             box.setValue(pot[0])
             box.input.readOnly = true
             box.input.className = "solved"
-            console.log(UnfilledBoxes.length)
             UnfilledBoxes = UnfilledBoxes.filter(item => {
                 return (item.column != box.column ||  item.row != box.row)
             }) // item!=box
-            console.log(UnfilledBoxes.length)
             FilledBoxes.push(box)
             box.elimateValueNearby()
             change = true
@@ -48,9 +46,7 @@ function LastNumberRemaining(FilledBoxes, UnfilledBoxes){
 function LastCellRemainingInGrid(FilledBoxes, UnfilledBoxes){
     let change = false
     Object.values(Grids).forEach(grid => {
-        let change = false
         for (let i = 1; i<=9; i++){
-            console.log(grid)
             let boxesWith = grid.Boxes.filter(box=>box && box.potetnialValues.includes(i)&& !box.getValue())
             if (boxesWith.length==1){
                 let box = boxesWith[0]
@@ -62,9 +58,56 @@ function LastCellRemainingInGrid(FilledBoxes, UnfilledBoxes){
                 }) // item!=box
                 FilledBoxes.push(box)
                 change = true
+                box.elimateValueNearby()
             }
         }
 
+    })
+    return [FilledBoxes, UnfilledBoxes, change]
+}
+function LastCellRemainingInRow(FilledBoxes, UnfilledBoxes){ //for some reason, rows are vertical
+    let change = false
+    let Boxes = Box.prototype.getBoxes()
+    Boxes.filter(row=>row).forEach(row => {
+        for (let i = 1; i<=9; i++){
+            let boxesWith = row.filter(box=>box && box.potetnialValues.includes(i)&& !box.getValue())
+            if (boxesWith.length==1){
+                let box = boxesWith[0]
+                box.setValue(i)
+                box.input.readOnly = true
+                box.input.className = "solved"
+                UnfilledBoxes = UnfilledBoxes.filter(item => {
+                    return (item.column != box.column ||  item.row != box.row)
+                }) // item!=box
+                FilledBoxes.push(box)
+                change = true
+                box.elimateValueNearby()
+            }
+        }
+
+    })
+    return [FilledBoxes, UnfilledBoxes, change]
+}
+function LastCellRemainingInColumn(FilledBoxes, UnfilledBoxes){ //for some reason, columns are horizontal
+    let change = false
+    let Boxes = Box.prototype.getBoxes()
+    let Columns = Grid.prototype.rotate(Boxes)
+    Columns.filter(column=>column).forEach(column => {
+        for (let i = 1; i<=9; i++){
+            let boxesWith = column.filter(box=>box && box.potetnialValues.includes(i)&& !box.getValue())
+            if (boxesWith.length==1){
+                let box = boxesWith[0]
+                box.setValue(i)
+                box.input.readOnly = true
+                box.input.className = "solved"
+                UnfilledBoxes = UnfilledBoxes.filter(item => {
+                    return (item.column != box.column ||  item.row != box.row)
+                }) // item!=box
+                FilledBoxes.push(box)
+                change = true
+                box.elimateValueNearby()
+            }
+        }
     })
     return [FilledBoxes, UnfilledBoxes, change]
 }
@@ -81,6 +124,7 @@ DOM.solveButton.addEventListener("click",function(){
     let suspense = false
     do {
         let change = false
+        suspense = false
         do {
             let b = LastNumberRemaining(FilledBoxes, UnfilledBoxes)
             FilledBoxes = b[0]
@@ -91,6 +135,20 @@ DOM.solveButton.addEventListener("click",function(){
         change = false
         do {
             let b = LastCellRemainingInGrid(FilledBoxes, UnfilledBoxes)
+            FilledBoxes = b[0]
+            UnfilledBoxes = b[1]
+            change = b[2]
+            suspense = suspense || change
+        } while(change)
+        do {
+            let b = LastCellRemainingInRow(FilledBoxes, UnfilledBoxes)
+            FilledBoxes = b[0]
+            UnfilledBoxes = b[1]
+            change = b[2]
+            suspense = suspense || change
+        } while(change)
+        do {
+            let b = LastCellRemainingInColumn(FilledBoxes, UnfilledBoxes)
             FilledBoxes = b[0]
             UnfilledBoxes = b[1]
             change = b[2]

@@ -28,6 +28,24 @@ class eGrid {
             new eBox(this,3,1),new eBox(this,3,2),new eBox(this,3,3)
         ]
     }
+    rotate(board){
+        let Columns = []
+        for (let i = 1; i<=9; i++){
+            let array = [
+                board[1][i],
+                board[2][i],
+                board[3][i],
+                board[4][i],            
+                board[5][i],
+                board[6][i],
+                board[7][i],
+                board[8][i],
+                board[9][i]
+            ]
+            Columns.push(array)
+        } 
+        return Columns
+    }
 }
 
 class eBox {
