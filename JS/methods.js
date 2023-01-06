@@ -167,7 +167,6 @@ const methods = {
                   Columns[column].filter(box => box && !box.getValue()).forEach(box => {box.potetnialValues[v]=null; box.potetnialValues[val]=null})                 
                 }
                 console.log("Double Elimination:",boxesWith[0],boxesWith[1],v, val)
-                console.log(boxesWith[0].potetnialValues.toString(),boxesWith[1].potetnialValues.toString())
                 localunfilledBoxes.filter(box => box && !box.getValue()).forEach(box => {box.potetnialValues[v]=null; box.potetnialValues[val]=null})
                 boxesWith[0].potetnialValues = [null,null,null,null,null,null,null,null,null,null]
                 boxesWith[1].potetnialValues = [null,null,null,null,null,null,null,null,null,null]
