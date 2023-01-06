@@ -48,4 +48,5 @@ DOM.solveButton.addEventListener("click",function(){
             } while(change)         
         })
     }while(UnfilledBoxes.length>0 && suspense)
+    console.log(UnfilledBoxes.length, Boxes)
 })

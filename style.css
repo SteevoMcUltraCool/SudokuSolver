@@ -1,7 +1,8 @@
 :root{
     --background: rgb(18,18,18);
     --foreground: rgb(245,245,245);
-    --tint: rgb(0,100,175)
+    --tint: rgb(100,200,250);
+    --darkTint: rgb(0,100,175)
 }
 
 body {
@@ -91,7 +92,7 @@ input {
 }
 
 #bigGrid input:disabled {
-    filter: contrast(30%);
+    filter: contrast(20%);
 }
 #rightHandSide {
     width: 25%;
@@ -108,6 +109,7 @@ input {
 
 #bigGrid .solved {
     filter: none;
+    color: var(--darkTint);
 }
 
 @media  screen and (max-width: 900px) {

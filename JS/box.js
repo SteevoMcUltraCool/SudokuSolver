@@ -29,18 +29,12 @@ class eGrid {
         ]
     }
     rotate(board){
-        let Columns = []
+        let Columns = [null]
         for (let i = 1; i<=9; i++){
             let array = [
-                board[1][i],
-                board[2][i],
-                board[3][i],
-                board[4][i],            
-                board[5][i],
-                board[6][i],
-                board[7][i],
-                board[8][i],
-                board[9][i]
+                null,board[1][i],board[2][i],board[3][i],
+                board[4][i],board[5][i],board[6][i],
+                board[7][i],board[8][i],board[9][i]
             ]
             Columns.push(array)
         } 
@@ -61,7 +55,7 @@ class eBox {
         this.parent = parent
         this.row = (parent.row-1)*3 + localRow
         this.column = (parent.column-1)*3 + localColumn
-        Boxes[this.column][this.row]= this
+        Boxes[this.row][this.column]= this
         this.element.appendChild(this.input)
         parent.element.appendChild(this.element)   
         this.potetnialValues =  [null,1,2,3,4,5,6,7,8,9]     
@@ -74,17 +68,17 @@ class eBox {
         this.input.value = String(number)
     }
     elimateValueNearby() {
-        let Row = Boxes[this.column]
+        let Row = Boxes[this.row]
         let Column = [
-            Boxes[1][this.row],
-            Boxes[2][this.row],
-            Boxes[3][this.row],
-            Boxes[4][this.row],            
-            Boxes[5][this.row],
-            Boxes[6][this.row],
-            Boxes[7][this.row],
-            Boxes[8][this.row],
-            Boxes[9][this.row]
+            Boxes[1][this.column],
+            Boxes[2][this.column],
+            Boxes[3][this.column],
+            Boxes[4][this.column],            
+            Boxes[5][this.column],
+            Boxes[6][this.column],
+            Boxes[7][this.column],
+            Boxes[8][this.column],
+            Boxes[9][this.column]
         ]
         let Grid = this.parent.Boxes
         Row.forEach(box=> {
