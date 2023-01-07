@@ -176,7 +176,8 @@ const methods = {
                 boxesWith[0].potetnialValues[v] = v
                 boxesWith[1].potetnialValues[v] = v
                 boxesWith[0].potetnialValues[val] = val
-                boxesWith[1].potetnialValues[val] = val               
+                boxesWith[1].potetnialValues[val] = val
+                console.log(boxesWith[0].potetnialValues.toString(),boxesWith[1].potetnialValues.toString())
                 //elimination time
                 new Move("Double Elimination in Grid: ",[boxesWith[0],boxesWith[1]], DOMmoves)
               }
