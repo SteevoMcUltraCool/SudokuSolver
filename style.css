@@ -51,6 +51,7 @@ input {
     border: 1px solid var(--foreground);   
     background-color: var(--background);
     transition: all 0.3s;
+    font-size: 12px;
 }
 .box:hover {
     border: 2px solid var(--tint);
@@ -84,27 +85,77 @@ input {
     text-align: center;
     
 }
+#bigGrid p {
+    position: relative;
+    top: -100%;
+}
 #bigGrid input:focus {
     border: none;
     box-shadow: none;
     stroke: none;
     background: transparent;
 }
+#moves {
+    display: flex;
+    width: 95%;
+    margin: 2% auto;
+    flex-direction: column;
+    overflow-y: auto;
+    height: 90%;
+    border: 2px solid var(--tint);
+}
+#moves h3 {
+    color: var(--foreground);
+    display: inline;
+}
+#moves span {
+    color: var(--tint);
+}
+#moves div {
+    border: 1px solid var(--foreground);
+    padding: 5px;
+    text-align: center;
+}
+#moves button {
+    all:unset;
+    padding: 4px;
+    border: 1px solid var(--tint);
+    color: var(--darkTint);
+    background-color: var(--background);
+    transition: all 0.3s;
+    position: relative;
+    left: 10px;
+}
+#moves button:hover{
+    transform: scale(1.025);
+    background-color: var(--foreground);
+    box-shadow: 0px 0px 3px var(--foreground);
+}
+#moves button:active{
+    transform: scale(1.02);
+    background-color: var(--foreground);
+    filter: saturate(60%);
+    box-shadow: 0px 0px 1px var(--foreground);
+}
+
+
 
 #bigGrid input:disabled {
     filter: contrast(20%);
 }
 #rightHandSide {
-    width: 25%;
+    width: 100%;
 }
 #solveBu {
-    width: 60%;
+    width: 75%;
     padding: 6px;
     border-radius: 10px;
     font-size: 30px;
     background-color: var(--foreground);
     color: var(--background);
     border: 1px solid var(--tint);
+    display: block;
+    margin: auto auto;
 }
 
 #bigGrid .solved {
@@ -116,9 +167,7 @@ input {
     #mommy {
         flex-direction: column;
     }
-    #bigGrid input {
-        font-size: 14px;
-    }
+
     #bigGrid {
         height: auto;
         width: 100%;
@@ -133,5 +182,10 @@ input {
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
       display: none;
+    }
+}
+@media  screen and (max-width: 610px) {
+    #bigBrid input {
+        font-size: 18px;
     }
 }

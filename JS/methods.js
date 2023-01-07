@@ -1,4 +1,6 @@
 import { Grid, Box } from "./box.js";
+import { Move } from "./moves.js";
+let DOMmoves = document.getElementById("moves")
 let PerformedOperations = []
 const methods = {
   LastNumberRemaining: {
@@ -13,7 +15,6 @@ const methods = {
         let pot = box.potetnialValues.filter((value) => value); // any null values ignored
         if (pot.length == 1) {
           box.setValue(pot[0]);
-          console.log("LNR:", box, pot[0])
           box.input.readOnly = true;
           box.input.className = "solved";
           UnfilledBoxes = UnfilledBoxes.filter((item) => {
@@ -22,6 +23,7 @@ const methods = {
           FilledBoxes.push(box);
           box.elimateValueNearby();
           change = true;
+          new Move("Last Number Remaining",[box], DOMmoves)
         } else if (pot.length == 0) {
           console.error(box,"puzzle unsolvable");
         }
@@ -46,7 +48,6 @@ const methods = {
             (box) => box && box.potetnialValues.includes(i) && !box.getValue()
           );
           if (boxesWith.length == 1) {
-            console.log("LCR Grid:", boxesWith[0], i)
             let box = boxesWith[0];
             box.setValue(i);
             box.input.readOnly = true;
@@ -57,6 +58,7 @@ const methods = {
             FilledBoxes.push(box);
             change = true;
             box.elimateValueNearby();
+            new Move("Last Cell Remaining In Grid: ",[box], DOMmoves)
           }
         }
       });
@@ -90,6 +92,7 @@ const methods = {
             FilledBoxes.push(box);
             change = true;
             box.elimateValueNearby();
+            new Move("Last Cell Remaining In Row: ",[box], DOMmoves)
           }
         }
       });
@@ -124,6 +127,7 @@ const methods = {
             FilledBoxes.push(box);
             change = true;
             box.elimateValueNearby();
+            new Move("Last Cell Remaining In Column: ",[box], DOMmoves)
           }
         }
       });
@@ -166,7 +170,6 @@ const methods = {
                   let column = boxesWith[0].column
                   Columns[column].filter(box => box && !box.getValue()).forEach(box => {box.potetnialValues[v]=null; box.potetnialValues[val]=null})                 
                 }
-                console.log("Double Elimination:",boxesWith[0],boxesWith[1],v, val)
                 localunfilledBoxes.filter(box => box && !box.getValue()).forEach(box => {box.potetnialValues[v]=null; box.potetnialValues[val]=null})
                 boxesWith[0].potetnialValues = [null,null,null,null,null,null,null,null,null,null]
                 boxesWith[1].potetnialValues = [null,null,null,null,null,null,null,null,null,null]
@@ -175,6 +178,7 @@ const methods = {
                 boxesWith[0].potetnialValues[val] = val
                 boxesWith[1].potetnialValues[val] = val               
                 //elimination time
+                new Move("Double Elimination in Grid: ",[boxesWith[0],boxesWith[1]], DOMmoves)
               }
             })
           }

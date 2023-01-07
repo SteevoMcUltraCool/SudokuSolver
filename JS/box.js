@@ -59,6 +59,8 @@ class eBox {
         this.element.appendChild(this.input)
         parent.element.appendChild(this.element)   
         this.potetnialValues =  [null,1,2,3,4,5,6,7,8,9]     
+        this.paragraph = document.createElement("p")
+        this.element.appendChild(this.paragraph)
     }
     getValue() {
         return Number(this.input.value)

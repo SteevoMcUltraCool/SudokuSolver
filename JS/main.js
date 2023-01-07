@@ -1,7 +1,8 @@
 import {Grid,Box} from "./box.js"
 import { Methods } from "./methods.js"
 const DOM = {
-    solveButton: document.getElementById("solveBu")
+    solveButton: document.getElementById("solveBu"),
+    moves : document.getElementById("moves")
 }
 let Grids = {}
 Grids.Grid1 = new Grid(1,1)
