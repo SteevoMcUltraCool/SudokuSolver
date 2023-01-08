@@ -46,7 +46,7 @@ class eBox {
     constructor(parent,localColumn,localRow){
         this.element = document.createElement("div")
         this.input = document.createElement("input")
-        this.input.type = "number"
+       // this.input.type = "number"
         this.input.min = 1
         this.input.max = 9
         this.element.className = "box " + ((localColumn==1 && "l ") || "")+ ((localColumn==3 && "r ") || "")+ ((localRow==1 && "t ") || "")+ ((localRow==3 && "b ") || "")
@@ -61,6 +61,30 @@ class eBox {
         this.potetnialValues =  [null,1,2,3,4,5,6,7,8,9]     
         this.paragraph = document.createElement("p")
         this.element.appendChild(this.paragraph)
+        this.input.row = this.row
+        this.input.column = this.column
+        this.input.oldInput = ""
+        let input_ = this.input
+        this.input.addEventListener("input",function(){
+            let input = input_.value
+            if (input == ""){input_.oldInput = ""; return true}
+            let x =Number(input)
+            if (x) {
+                if (x%1 == 0 && x>=1 && x<=9){
+                    input_.oldInput = String(x)
+                    return true
+                }else {
+                    input_.value = input.substring(input.length-1)
+                    if (Number(input_.value)>=1){
+                        input_.oldInput = input_.value
+                        return true
+                    }
+                }
+            }
+            
+            input_.value = input_.oldInput
+            return false
+        })
     }
     getValue() {
         return Number(this.input.value)

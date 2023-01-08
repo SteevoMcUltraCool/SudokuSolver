@@ -1,5 +1,6 @@
 import {Grid,Box} from "./box.js"
 import { Methods } from "./methods.js"
+import { Move } from "./moves.js"
 const DOM = {
     solveButton: document.getElementById("solveBu"),
     moves : document.getElementById("moves")
@@ -36,6 +37,7 @@ DOM.solveButton.addEventListener("click",function(){
     })
     Boxes.forEach(row=>row && row.filter(box => box && !box.getValue()).forEach(box => UnfilledBoxes.push(box)))
     let suspense = false
+    new Move("Mark Potential Values: ", [], DOM.moves)
     do {
         suspense = false
         Object.values(Methods).forEach(method => {
@@ -50,4 +52,34 @@ DOM.solveButton.addEventListener("click",function(){
         })
     }while(UnfilledBoxes.length>0 && suspense)
     console.log(UnfilledBoxes.length, Boxes)
+})
+
+window.addEventListener("keydown", function(event){
+    let focus = document.activeElement 
+    if (focus){
+        let row = focus.row
+        let column = focus.column
+        let Boxes = Box.prototype.getBoxes()
+        if (row && column){
+            if (event.key == "w" || event.key == "ArrowUp" ){
+                    row = row  - 1
+                    if (row == 0){row = 9}
+                    Boxes[row][column].input.focus()
+                    console.log(Boxes[row][column].input)
+            }else if (event.key == "s" || event.key == "ArrowDown"){
+                    row = row  + 1
+                    if (row == 10){row = 1}
+                    Boxes[row][column].input.focus()
+            }else if (event.key == "a" || event.key == "ArrowLeft"){
+                    column = column  - 1
+                    if (column == 0){column = 9}
+                    Boxes[row][column].input.focus()
+            }else if (event.key=="d" || event.key == "ArrowRight"){
+                    column = column  + 1
+                    if (column == 10){column = 1}
+                    Boxes[row][column].input.focus()
+            }
+        }
+        
+    }
 })

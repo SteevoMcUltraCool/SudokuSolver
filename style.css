@@ -90,10 +90,16 @@ input {
     top: -100%;
 }
 #bigGrid input:focus {
-    border: none;
     box-shadow: none;
     stroke: none;
     background: transparent;
+    border: 2px dashed var(--tint);
+}
+.box:hover+ .box input:focus {
+    box-shadow: none;
+    stroke: none;
+    background: transparent;
+    border: none;
 }
 #moves {
     display: flex;
@@ -169,8 +175,9 @@ input {
     }
 
     #bigGrid {
-        height: auto;
+        height: unset;
         width: 100%;
+        aspect-ratio: 1;
     }
     #rightHandSide {
         width: 100%;
@@ -189,3 +196,4 @@ input {
         font-size: 18px;
     }
 }
+

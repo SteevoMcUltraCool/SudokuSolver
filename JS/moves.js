@@ -1,5 +1,5 @@
 import { Box, Grid} from "./box.js";
-let moveNumber = 1
+let moveNumber = 0
 class move{
     constructor(moveType, affectedBoxes,DOMmoves){
         let Boxes = Box.prototype.getBoxes()
