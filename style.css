@@ -38,6 +38,7 @@ input {
     border: 4px solid var(--foreground);
     border-radius: 10px;
     padding: 0px;
+    max-width: 75%;
 }
 
 .grid {
@@ -107,7 +108,7 @@ input {
     margin: 2% auto;
     flex-direction: column;
     overflow-y: auto;
-    height: 90%;
+    max-height: 90%;
     border: 2px solid var(--tint);
 }
 #moves h3 {
@@ -169,15 +170,18 @@ input {
     color: var(--darkTint);
 }
 
-@media  screen and (max-width: 900px) {
+@media  screen and (max-width: 950px) {
     #mommy {
+        display: unset;
         flex-direction: column;
     }
 
     #bigGrid {
         height: unset;
         width: 100%;
+        max-width: 750px;
         aspect-ratio: 1;
+        margin: auto auto;
     }
     #rightHandSide {
         width: 100%;
@@ -191,8 +195,8 @@ input {
       display: none;
     }
 }
-@media  screen and (max-width: 610px) {
-    #bigBrid input {
+@media  screen and (max-width: 550px) {
+    #bigGrid input {
         font-size: 18px;
     }
 }
