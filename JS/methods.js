@@ -267,4 +267,5 @@ const methods = {
     },
   },
 };
+console.log("yello");
 export let Methods = methods;
