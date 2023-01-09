@@ -186,6 +186,9 @@ input {
     #rightHandSide {
         width: 100%;
     }
+    .box {
+        font-size: 9px;
+    }
     #solveBu {
         width: 100%;
         margin: 10px auto;

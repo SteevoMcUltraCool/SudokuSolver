@@ -83,3 +83,16 @@ window.addEventListener("keydown", function(event){
         
     }
 })
+function iOS() {
+    return [
+      'iPad Simulator',
+      'iPhone Simulator',
+      'iPod Simulator',
+      'iPad',
+      'iPhone',
+      'iPod'
+    ].includes(navigator.platform)
+}
+if (iOS()){
+    
+}
