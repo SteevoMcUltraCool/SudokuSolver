@@ -212,9 +212,9 @@ input {
 a {
  color: blue;   
 }
-a:hover{
-    color: white;
-}
 a:visited{
     color: blue;
+}
+a:hover{
+    color: white;
 }
