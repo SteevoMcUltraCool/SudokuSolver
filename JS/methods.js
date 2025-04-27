@@ -143,7 +143,7 @@ const methods = {
     getDescription: (n1, n2) =>
       `Pay attention to the highlighted boxes. Since no other box in the grid can be ${n1} or ${n2}, we know these boxes must be ${n1} and ${n2}, so we can eliminate these values from surrounding boxes/rows.`,
     difficulty: 3,
-    difficultyDepracatives: ["DoubleEliminationInRow"],
+    difficultyDepracatives: [],
     operate: function (FilledBoxes, UnfilledBoxes, Grids) {
       let change = false;
       let Boxes = Box.prototype.getBoxes();

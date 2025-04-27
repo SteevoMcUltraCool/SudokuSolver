@@ -22,6 +22,58 @@
             and explaining them in a human-readable way.
         </p>
     </div>
+    <div class = "bsec">
+        <h2>Sudoku Rules</h2>
+        <p>
+            A sudoku puzzle is a 9x9 grid. The grid has 9 rows, 9 columns, and nine 3x3 sections (or subgrids).
+            You win the game by arranging the numbers 1->9 so that no row, column or subgrid has any duplicates (meaning they each conain 1->9 exactly once)
+            There are 6,670,903,752,021,072,936,960 possible winning Sudoku boards, so every challenge is unique, different, and exciting!
+        </p>
+    </div>
+    <div class = "bsec">
+        <h2>Mark Potential Values</h2>
+        <h4>Skill level: Beginner</h4>
+        <p>
+            It's important to utilize all the given information. Make sure you are aware which numbers can and cannot go in each tile.
+            This is the first step my algorithm does every time it begins a puzzle.
+        </p>
+    </div>
+    <div class = "bsec">
+        <h2>Last Number Remaining</h2>
+        <h4>Skill level: Beginner</h4>
+        <p>
+            Look for any tiles where only one number can go. If, like this Solver, you've flawlessly marked all potential values, these should stand out.
+            Otherwise, look for boxes with 8 different numbers in it's corresponding row, column, or section- the number that isn't there goes into that box!
+            <br>REMEMBER: every time you fill in a box, make sure to update everything around it!
+        </p>
+    </div>
+    <div class = "bsec">
+        <h2>Last Cell Remaining In Grid</h2>
+        <h4>Skill level: Beginner</h4>
+        <p>
+            Look at each subgrid one at a time. Keep track of which numbers can go where. If there is only one available
+            spot where a particular number can go, then you know that number must go there.
+        </p>
+    </div>
+    <div class = "bsec">
+        <h2>Last Cell Remaining In Row / Column</h2>
+        <h4>Skill level: Beginner</h4>
+        <p>
+            Similar to the last strategy, look at each row and column one at a time. Keep track of which numbers can go where. If there is only one available
+            spot where a particular number can go, then you know that number must go there.
+        </p>
+    </div>
+    <div class = "bsec">
+        <h2>Double Elimination In Grid</h2>
+        <h4>Skill level: intermediate</h4>
+        <p>
+            Look at all the boxes in a subgrid. See if there is only 2 where a pair of numbers can go. This may be a little tricky to spot.
+            However, if those boxes are also both in the same row and column, you can eleminate those numbers as a choice for that row / column aswell!
+        </p>
+    </div>
+    
+    <h3>Those are all the strategies so far. Come back soon to learn new strategies</h3>
+    <p>Last update: 4/26/2025</p>
     <script src="JS/main.js" type="module"></script>
 
 </body>
