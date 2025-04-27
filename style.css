@@ -19,7 +19,7 @@ h1 {
 }
 
 #mommy {
-    height: calc(99% - 75px);
+    height: calc(calc(99% - 75px) - 1em);
     margin: 10px auto;
     width: 95%;
     display: flex;
